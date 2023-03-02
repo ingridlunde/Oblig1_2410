@@ -1,6 +1,8 @@
 import http.server
 import socketserver
 
+# Task 1 - develop a webserver that handles http request.
+
 PORT = 8000  # Listens on this port
 FILE_DIR = "."  # The directory to serve files from
 
@@ -22,22 +24,37 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):  # "self" parameter is a reference to the current instance of a class. It is similar to 'this'
         # Parse the request after a spesific file_path. If there is no file_path. index.html is sent
         file_path = self.path[1:]  # Remove leading slash
-        if not file_path:
-            file_path = "index.html"  # Serve index.html by default
+
+        # If not file in path, the index.hmtl would be sent by default.
+        # Since it is not in the assignement this way I commented it out.
+        # if not file_path:
+        # file_path = "index.html"  # Serve index.html by default
 
         # Try to open the requested file
         try:
             f = open(FILE_DIR + "/" + file_path, "rb")
             file_content = f.read()
             f.close()
+
             # Send response to the header
             # 200 request means that the request has succeeded and the server has returned the requested data.
             # The response body typically contains the data that was requested by the client.
-            self.send_response(200)
-            self.send_header("Content-type", "text/html")
+            self.send_response(200)  # sends the initial line of the HTTP response, including the HTTP status code
+
+            # Sends HTTP headers, which provide additional information about the response.
+            # Headers are sent as key-value pairs, with the header name as the key and the header value as the value
+            self.send_header("Content-type", "text/html")  # send an HTTP header indication the response body is HTML
+
+            # Method call that adds an HTTP header to the response
+            # The Content-length header indicates the size of the response body in bytes.
+            # len(file_content) is the length of the file content in bytes, which is calculated using the built-in
+            # len() function in Python
             self.send_header("Content-length", len(file_content))
+
+            # Signals the end of the headers section of the HTTP response.
             self.end_headers()
             # Send file content
+            # The wfile attribute is a file-like object that allows you to send data to the client.
             self.wfile.write(file_content)
         except FileNotFoundError:
             # Send 404 response
