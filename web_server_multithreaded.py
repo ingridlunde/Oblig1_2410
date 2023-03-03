@@ -12,7 +12,7 @@ FILE_DIR = "."  # The directory to serve files from
 # A Handler function handles a respons to a specific request and provides a way to serv files and content over the web
 # SimpleHTTPRequestHandler provides a basic implementation og an HTTP server that can
 # serve files from a local directory.
-class RequestHandler(socketserver.BaseRequestHandler):
+class RequestHandler(http.server.BaseHTTPRequestHandler):
 
     # do_GET() "BaseHTTPRequestHandler" class in Python's http.server module, which is a default request handler
     # class for HTTP servers.It is called when an HTTP GET request is received by the server.

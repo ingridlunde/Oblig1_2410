@@ -5,10 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd2e7be3-1f40-42d7-a019-212c2bcb391d" name="Changes" comment="Laget web_server_multithreaded.py">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client_threaded.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web_server_multithreaded.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_server_multithreaded.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +59,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677750557355</updated>
-      <workItem from="1677750558587" duration="24762000" />
+      <workItem from="1677750558587" duration="24977000" />
     </task>
     <task id="LOCAL-00001" summary="Laget server.py oblig1">
       <created>1677755832805</created>
@@ -86,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677829354831</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Laget web_server_multithreaded.py">
+      <created>1677848544277</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1677848544277</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

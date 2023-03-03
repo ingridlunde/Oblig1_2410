@@ -25,7 +25,6 @@ def send_request(host, port, filename):
         # Receive the response from the server
 
         response = b''
-        print("inside response")
         while True:
             data = cl_socket.recv(1024)
             if not data:
