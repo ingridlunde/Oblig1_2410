@@ -4,7 +4,7 @@ import threading
 
 # Task 3 - develop a multithreaded server that is capable of serving multiple requests simultaneously..
 
-PORT = 8000  # Listens on this port
+PORT = 8080  # Listens on this port
 FILE_DIR = "."  # The directory to serve files from
 
 
@@ -12,7 +12,7 @@ FILE_DIR = "."  # The directory to serve files from
 # A Handler function handles a respons to a specific request and provides a way to serv files and content over the web
 # SimpleHTTPRequestHandler provides a basic implementation og an HTTP server that can
 # serve files from a local directory.
-class MyHandler(http.server.SimpleHTTPRequestHandler):
+class RequestHandler(socketserver.BaseRequestHandler):
 
     # do_GET() "BaseHTTPRequestHandler" class in Python's http.server module, which is a default request handler
     # class for HTTP servers.It is called when an HTTP GET request is received by the server.
@@ -23,44 +23,57 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
     # sends the response directly to the client. If the requested file is not present on the server,
     # the method sends an HTTP "404 Not Found" message back to the client.
     def do_GET(self):  # "self" parameter is a reference to the current instance of a class. It is similar to 'this'
-        # Parse the request after a spesific file_path. If there is no file_path. index.html is sent
-        file_path = self.path[1:]  # Remove leading slash
+        print("inside do_GET")
+        while True:
+            # Receive the request data from the client
 
-        # If not file in path, the index.hmtl would be sent by default.
-        if not file_path:
-            file_path = "index.html"  # Serve index.html by default
+            request_data = self.request.recv(1024).decode("utf-8")
+            print(f"Request received:")
+            if not request_data:
+                break
 
-        # Try to open the requested file
-        try:
-            f = open(FILE_DIR + "/" + file_path, "rb")
-            file_content = f.read()
-            f.close()
+            # splits the request_data string into a list of three elements, using the space character as the separator.
+            # The resulting list contains the request method, request path, and HTTP version.
+            # The _ variable is assigned the third element of the list, which is the HTTP version.
+            # Since the HTTP version is not used in the code snippet, we can use the _ variable to ignore it.
+            request_method, request_path, _ = request_data.split(" ", 2)
 
-            # Send a 200 OK response to the header
-            # 200 request means that the request has succeeded and the server has returned the requested data.
-            # The response body typically contains the data that was requested by the client.
-            self.send_response(200)  # sends the initial line of the HTTP response, including the HTTP status code
+            # Construct the response
+            if request_method == "GET":
+                # Try to open the requested file
+                try:
+                    with open(request_data[1:], "rb") as f:
+                        file_content = f.read()
 
-            # Sends HTTP headers, which provide additional information about the response.
-            # Headers are sent as key-value pairs, with the header name as the key and the header value as the value
-            self.send_header("Content-type", "text/html")  # send an HTTP header indication the response body is HTML
+                    # Send a 200 OK response to the header
+                    # 200 request means that the request has succeeded and the server has returned the requested
+                    # data. The response body typically contains the data that was requested by the client.
+                    # sends the initial line of the HTTP response, including the HTTP status # code
+                    self.send_response(200)
+                    # Sends HTTP headers, which provide additional information about the response.
+                    # Headers are sent as key-value pairs, with the header name as the key and the header value as
+                    # value send an HTTP header indication the response body is HTML
+                    self.send_header("Content-type", "text/html")
 
-            # Method call that adds an HTTP header to the response
-            # The Content-length header indicates the size of the response body in bytes.
-            # len(file_content) is the length of the file content in bytes, which is calculated using the built-in
-            # len() function in Python
-            self.send_header("Content-length", len(file_content))
+                    # Method call that adds an HTTP header to the response
+                    # The Content-length header indicates the size of the response body in bytes.
+                    # len(file_content) is the length of the file content in bytes, which is calculated using the
+                    # built-in len() function in Python
+                    self.send_header("Content-length", len(file_content))
 
-            # Signals the end of the headers section of the HTTP response.
-            self.end_headers()
-            # Send file content
-            # The wfile attribute is a file-like object that allows you to send data to the client.
-            self.wfile.write(file_content)
+                    # Signals the end of the headers section of the HTTP response.
+                    self.end_headers()
+                    # Send file content
+                    # The wfile attribute is a file-like object that allows you to send data to the client.
+                    self.wfile.write(file_content)
 
-        # IOE error: Not found
-        except FileNotFoundError:
-            # Send 404 response
-            self.send_error(404, "File not found")
+                # IOE error: Not found
+                except FileNotFoundError:
+                    # Send 404 response
+                    self.send_error(404, "File not found")
+            else:
+                # Sends error if the client dont implement a file.
+                self.send_error(501, "Not implemented")
 
 
 # Creates a threaded TCP server object that listens for incoming connections on the specific port.
@@ -73,39 +86,36 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
 
 # The TCPServer class provides the basic infrastructure for a TCP server by listening for incoming connections on a
 # specified host and port, and then creating a new socket for each incoming connection.
-class ThreadedHTTPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
-    # The pass statement in the class definition is simply a placeholder that indicates there are no additional
-    # attributes or methods defined in the class.
-    pass
+'class ThreadedHTTPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):'
+'# The pass statement in the class definition is simply a placeholder that indicates there are no additional'
+'# attributes or methods defined in the class. '
+'pass'
 
 
-# Creates a TCP server object that listens for incoming connections on the specific port.
-# TCP server takes two arguments.
-# The server adress(which is represented as a tuple, with the hostname or IP adress and port number).
-# The handler class, which is used to handle incoming request. Myhandler is the class
-with ThreadedHTTPServer(("", PORT), MyHandler) as httpd:
-    print("serving at port", PORT)
+if __name__ == "__main__":
+    server = socketserver.ThreadingTCPServer(("", PORT), RequestHandler)
+    # Creates a TCP server object that listens for incoming connections on the specific port.
+    # TCP server takes two arguments.
+    # The server adress(which is represented as a tuple, with the hostname or IP adress and port number).
+    # The handler class, which is used to handle incoming request. Myhandler is the class
+    with server:
+        print(f"server listening at port {PORT}")
 
-    # Start a new thread to handle each request.
-    # Creates a new thread that will call the method serve_forever() method which starts the server and keeps it
-    # looping for incoming request. By calling the method of the 'TcpSrver' class in a seperate thread, the server can
-    # listen for incoming connections and handle multiple requests simultaneously while the main thread continues to
-    # run.
-    # it is prosessed by the request handler class and a response is sent back to the client.
-    thread = threading.Thread(target=httpd.serve_forever)
+        # Start a new thread to handle each request.
+        # Creates a new thread that will call the method serve_forever() method which starts the server and keeps it
+        # looping for incoming request. By calling the method of the 'TcpSrver' class in a seperate thread, the server
+        # can listen for incoming connections and handle multiple requests simultaneously while the main thread
+        # continues to run.
+        # it is prosessed by the request handler class and a response is sent back to the client.
+        server_thread = threading.Thread(target=server.serve_forever)
 
-    # Thread.daemon means that the new thread will be a daemon thread, and will be terminated automatically when the
-    # main program exits. This can be useful in situations where you want to start a new thread for a short-lived task
-    # that does not need to complete before the program finishes execution.
-    thread.daemon = True
-    # Thread.start() will start the new thread and execute the target function in the background while the main thread
-    # continues running.
-    thread.start()
+        # Thread.daemon means that the new thread will be a daemon thread, and will be terminated automatically when the
+        # main program exits. This can be useful in situations where you want to start a new thread for a short-lived
+        # task that does not need to complete before the program finishes execution.
+        server_thread.daemon = True
+        # Thread.start() will start the new thread and execute the target function in the background while the main
+        # thread continues running.
+        server_thread.start()
 
-    # Wait for user input to stop the server.
-    input("Press any key to stop the server...\n")
-    # Shut down the server
-    httpd.shutdown()
-    # a method which starts the server and keeps it looping for incoming request. As soon as a requesr arrives,
-    # it is prosessed by the request handler class and a response is sent back to the client.
-    httpd.serve_forever()
+        # Wait for user input to stop the server.
+        input("Press any key to stop the server...\n")
