@@ -8,10 +8,6 @@ PORT = 8080  # Listens on this port
 FILE_DIR = "."  # The directory to serve files from
 
 
-# Handler class which takes the handler in as an argument
-# A Handler function handles a respons to a specific request and provides a way to serv files and content over the web
-# SimpleHTTPRequestHandler provides a basic implementation og an HTTP server that can
-# serve files from a local directory.
 class RequestHandler(http.server.BaseHTTPRequestHandler):
 
     # do_GET() "BaseHTTPRequestHandler" class in Python's http.server module, which is a default request handler
@@ -26,9 +22,9 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         print("inside do_GET")
         while True:
             # Receive the request data from the client
-
             request_data = self.request.recv(1024).decode("utf-8")
             print(f"Request received:")
+            print(request_data)
             if not request_data:
                 break
 
@@ -36,10 +32,12 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
             # The resulting list contains the request method, request path, and HTTP version.
             # The _ variable is assigned the third element of the list, which is the HTTP version.
             # Since the HTTP version is not used in the code snippet, we can use the _ variable to ignore it.
+            print(request_method)
             request_method, request_path, _ = request_data.split(" ", 2)
 
             # Construct the response
             if request_method == "GET":
+                print(request_method)
                 # Try to open the requested file
                 try:
                     with open(request_data[1:], "rb") as f:
@@ -86,12 +84,12 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
 
 # The TCPServer class provides the basic infrastructure for a TCP server by listening for incoming connections on a
 # specified host and port, and then creating a new socket for each incoming connection.
-'class ThreadedHTTPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):'
-'# The pass statement in the class definition is simply a placeholder that indicates there are no additional'
-'# attributes or methods defined in the class. '
-'pass'
+"""class ThreadedHTTPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):"
+    "# The pass statement in the class definition is simply a placeholder that indicates there are no additional"
+    "# attributes or methods defined in the class. "
+    "pass"""
 
-
+""""
 if __name__ == "__main__":
     server = socketserver.ThreadingTCPServer(("", PORT), RequestHandler)
     # Creates a TCP server object that listens for incoming connections on the specific port.
@@ -99,7 +97,7 @@ if __name__ == "__main__":
     # The server adress(which is represented as a tuple, with the hostname or IP adress and port number).
     # The handler class, which is used to handle incoming request. Myhandler is the class
     with server:
-        print(f"server listening at port {PORT}")
+        print(f"server listening at port {PORT} - test")
 
         # Start a new thread to handle each request.
         # Creates a new thread that will call the method serve_forever() method which starts the server and keeps it
@@ -118,4 +116,9 @@ if __name__ == "__main__":
         server_thread.start()
 
         # Wait for user input to stop the server.
-        input("Press any key to stop the server...\n")
+        input("Press any key to stop the server...\n") """
+
+if __name__ == "__main__":
+    with socketserver.TCPServer(("", 8080), RequestHandler) as httpd:
+        print("Serving at port 8080")
+        httpd.serve_forever()

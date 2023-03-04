@@ -5,6 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd2e7be3-1f40-42d7-a019-212c2bcb391d" name="Changes" comment="Laget web_server_multithreaded.py">
+      <change afterPath="$PROJECT_DIR$/clientMulti.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/multiTester.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webServerMulti.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client_threaded.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_threaded.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web_server_multithreaded.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_server_multithreaded.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +33,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2MSALlIQJAw2CDsQyVmlN1CfNYn" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -43,12 +53,15 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/.idea" />
+      <recent name="$PROJECT_DIR$/.idea/inspectionProfiles" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -59,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677750557355</updated>
-      <workItem from="1677750558587" duration="24977000" />
+      <workItem from="1677750558587" duration="38187000" />
     </task>
     <task id="LOCAL-00001" summary="Laget server.py oblig1">
       <created>1677755832805</created>
@@ -89,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677848544277</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Laget web_server_multithreaded.py">
+      <created>1677849012403</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1677849012403</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -113,6 +133,9 @@
     <option name="LAST_COMMIT_MESSAGE" value="Laget web_server_multithreaded.py" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Oblig1_2410$web_server_multithreaded.coverage" NAME="web_server_multithreaded Coverage Results" MODIFIED="1677846231556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Oblig1_2410$web_server_multithreaded.coverage" NAME="web_server_multithreaded Coverage Results" MODIFIED="1677922750770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Oblig1_2410$webServerMulti.coverage" NAME="webServerMulti Coverage Results" MODIFIED="1677962282939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Oblig1_2410$socketserver.coverage" NAME="socketserver Coverage Results" MODIFIED="1677868802270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10" />
+    <SUITE FILE_PATH="coverage/Oblig1_2410$web_server_simple.coverage" NAME="web_server_simple Coverage Results" MODIFIED="1677879219253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

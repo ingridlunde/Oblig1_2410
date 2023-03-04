@@ -9,12 +9,12 @@ PORT = 8080  # Servers port number
 
 # Making a method to send the request to the server through the terminal with the parsed arguments from the client
 def send_request(host, port, filename):
-    print("inside send_request")
     # Create a TCP socket to establish a connection between the client and the server over the internet og a network.
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cl_socket:
         # Connect to the server
         cl_socket.connect((host, port))
         print("You are connected to Inga's server")
+
         # Send an HTTP request to the server.
         # {filename} makes it possible for the client to write a specific file through the terminal
         request = f'GET /{filename} HTTP/1.1\r\nHost: {host}\r\n\r\n'

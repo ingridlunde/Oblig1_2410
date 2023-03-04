@@ -2,13 +2,10 @@
 import argparse
 import socket
 
-HOST = 'localhost'  # Testing from the same computer. Then I can use 'localhost' or 127.0.0.1
-PORT = 8080  # Servers port number
-
 
 # Making a method to send the request to the server through the terminal with the parsed arguments from the client
 def send_request(host, port, filename):
-    # Create a TCP socket to establish a connection between the client and the server over the internet og a network.
+    # Create a TCP socket to establish a connection between the client and the server over the internet on a network.
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cl_socket:
         # Connect to the server
         cl_socket.connect((host, port))
@@ -25,7 +22,17 @@ def send_request(host, port, filename):
         print(response.decode())
 
 
+def testingMultipleClients():  # Used for testing multiple clients at the same time
+    host = "127.0.0.1"
+    port = 8000
+    filename = "index.html"
+
+    send_request(host, port, filename)
+
+
 if __name__ == '__main__':
+
+    # Parsing arguments from the client connecting to the server.
     parser = argparse.ArgumentParser(description='HTTP client')
     parser.add_argument('host', help='server IP address or host name')
     parser.add_argument('port', type=int, help='server port')
@@ -33,3 +40,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     send_request(args.host, args.port, args.filename)
+
+# Method used for testing multiple clients
+# testingMultipleClients()  # Used for testing multiple clients at the same time
