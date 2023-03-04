@@ -1,0 +1,14 @@
+//Notater til oppgaven
+
+Har prøvd forskjellige for å få mulitserver til å fungere.
+
+Det er filen client.py som kjører med web_Server_mulit og web_server_simple.
+
+Har ikke klart å finne ut hvorfor web_server_multithreaded ikke fungerer. Lurer på om det er noe i while løkken som
+roter det til med flere clienter og at det ikke lukkes helt som det skal. Likevel er det mye kommentarer der som kan
+vise forskjellige måter å løse oppgavene på som kan være relevant til innelveringen.
+
+client_threaded fungerer heller ikke helt som den skal. Har sjekket om den kjører opp mot web_server_multi og det gjør
+den. Det viser til at problemet ligger i web_server_mulitthreaded, men jeg har en som kjører og ser derfor ikke
+mer på det nå. Likevel mange gode notater og mulighet til å rydde opp i den på et senere tidspunkt.
+client_threded er også godt kommentert.
